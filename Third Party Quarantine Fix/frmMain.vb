@@ -13,6 +13,8 @@ Public Class frmMain
 
         GetProgramList()
 
+        cmdReload.Hide()
+
     End Sub
 
     Private Sub cmdInstall_Click(sender As Object, e As EventArgs) Handles cmdInstall.Click
@@ -67,6 +69,14 @@ Public Class frmMain
                 ElseIf programName(1) = "Shockwave" Then
                     installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
                     fileList = installerDirectory.GetFiles("*" & programName(1) & "*" & ".exe")
+                    installer = fileList(0).FullName()
+                ElseIf programName(1) = "AIR" Then
+                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                    fileList = installerDirectory.GetFiles("*" & programName(1) & "*" & ".exe")
+                    installer = fileList(0).FullName()
+                ElseIf programName(1) = "Reader" Then
+                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                    fileList = installerDirectory.GetFiles("*" & "Rdr" & "*" & ".exe")
                     installer = fileList(0).FullName()
                 End If
             ElseIf programName(0) = "Mozilla" Then
