@@ -13,8 +13,6 @@ Public Class frmMain
 
         GetProgramList()
 
-        cmdReload.Hide()
-
     End Sub
 
     Private Sub cmdInstall_Click(sender As Object, e As EventArgs) Handles cmdInstall.Click
@@ -70,14 +68,6 @@ Public Class frmMain
                     installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
                     fileList = installerDirectory.GetFiles("*" & programName(1) & "*" & ".exe")
                     installer = fileList(0).FullName()
-                ElseIf programName(1) = "AIR" Then
-                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
-                    fileList = installerDirectory.GetFiles("*" & programName(1) & "*" & ".exe")
-                    installer = fileList(0).FullName()
-                ElseIf programName(1) = "Reader" Then
-                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
-                    fileList = installerDirectory.GetFiles("*" & "Rdr" & "*" & ".exe")
-                    installer = fileList(0).FullName()
                 End If
             ElseIf programName(0) = "Mozilla" Then
                 installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(1))
@@ -127,7 +117,7 @@ Public Class frmMain
     Public Sub GetProgramList()
         'For testing purposes.
         'xmlDoc.load("\\ant\dept-na\oak4\Support\IT\James\State_OAK4_9HBB7Y1\Third Party.xml")
-        xmlDoc.load("C:\Users\jwhitney\Desktop\Third Party.xml")
+        'xmlDoc.load("C:\Users\jwhitney\Desktop\Third Party.xml")
 
         'Open Quarantine third party software state file.
         'Parse XML file for a tag unique to systems with third party quarantine issues.
@@ -138,7 +128,7 @@ Public Class frmMain
         'extract the name of the program and add it to the list box.
         'Otherwise, add the item "None" to the list box and disable the Install button.
 
-        'xmlDoc.load("C:\Program Files (x86)\Quarantine\State\Third Party.xml")
+        xmlDoc.load("C:\Program Files (x86)\Quarantine\State\Third Party.xml")
         objUpdateCheck = xmlDoc.getElementsByTagName("firstRun")
         objNodeList = xmlDoc.getElementsByTagName("d3p1:Key")
 
