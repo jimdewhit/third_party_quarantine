@@ -19,4 +19,3 @@ C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine F
 C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\bin\Debug\Third Party Quarantine Fix.exe
 C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\bin\Debug\Third Party Quarantine Fix.pdb
 C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\bin\Debug\Third Party Quarantine Fix.xml
-C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\obj\Debug\ThirdPartyQuarantineFix.frmReevaluate.resources
