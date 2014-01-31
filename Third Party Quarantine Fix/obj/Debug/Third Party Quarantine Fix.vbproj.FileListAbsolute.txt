@@ -1,0 +1,22 @@
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\obj\Debug\Third Party Quarantine Fix.vbproj.GenerateResource.Cache
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\bin\Debug\ThirdPartyQuarantineFix.exe.config
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\bin\Debug\ThirdPartyQuarantineFix.exe
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\bin\Debug\ThirdPartyQuarantineFix.pdb
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\bin\Debug\ThirdPartyQuarantineFix.xml
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\obj\Debug\ThirdPartyQuarantineFix.frmMain.resources
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\obj\Debug\ThirdPartyQuarantineFix.Resources.resources
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\obj\Debug\ThirdPartyQuarantineFix.exe
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\obj\Debug\ThirdPartyQuarantineFix.xml
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\obj\Debug\ThirdPartyQuarantineFix.pdb
+C:\Users\jwhitney\AppData\Local\Temporary Projects\WindowsApplication1\obj\Debug\ThirdPartyQuarantineFix.exe.manifest
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\obj\Debug\ThirdPartyQuarantineFix.frmMain.resources
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\obj\Debug\ThirdPartyQuarantineFix.Resources.resources
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\obj\Debug\Third Party Quarantine Fix.vbproj.GenerateResource.Cache
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\obj\Debug\Third Party Quarantine Fix.exe
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\obj\Debug\Third Party Quarantine Fix.xml
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\obj\Debug\Third Party Quarantine Fix.pdb
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\bin\Debug\Third Party Quarantine Fix.exe.config
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\bin\Debug\Third Party Quarantine Fix.exe
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\bin\Debug\Third Party Quarantine Fix.pdb
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\bin\Debug\Third Party Quarantine Fix.xml
+C:\Users\jwhitney\Documents\Visual Studio 2012\Projects\Third Party Quarantine Fix\Third Party Quarantine Fix\obj\Debug\ThirdPartyQuarantineFix.frmReevaluate.resources
