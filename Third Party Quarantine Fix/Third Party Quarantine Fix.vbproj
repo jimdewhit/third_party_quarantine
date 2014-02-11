@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{46F2B95B-6197-4746-86FC-F3DBC2FFFF6A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>ThirdPartyQuarantineFix.My.MyApplication</StartupObject>
-    <RootNamespace>ThirdPartyQuarantineFix</RootNamespace>
-    <AssemblyName>Third Party Quarantine Fix</AssemblyName>
+    <StartupObject>QuarantineResolver.My.MyApplication</StartupObject>
+    <RootNamespace>QuarantineResolver</RootNamespace>
+    <AssemblyName>Quarantine Resolver</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -38,7 +38,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Third Party Quarantine Fix.xml</DocumentationFile>
+    <DocumentationFile>Quarantine Resolver.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -48,7 +48,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Third Party Quarantine Fix.xml</DocumentationFile>
+    <DocumentationFile>Quarantine Resolver.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -85,6 +85,7 @@
     <ApplicationIcon>windows-7-software-icon1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />

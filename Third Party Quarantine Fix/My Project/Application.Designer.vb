@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.ThirdPartyQuarantineFix.frmMain
+            Me.MainForm = Global.QuarantineResolver.frmMain
         End Sub
     End Class
 End Namespace

@@ -63,10 +63,10 @@ Namespace My
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
         
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.ThirdPartyQuarantineFix.My.MySettings
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")> _
+        Friend ReadOnly Property Settings() As Global.QuarantineResolver.My.MySettings
             Get
-                Return Global.ThirdPartyQuarantineFix.My.MySettings.Default
+                Return Global.QuarantineResolver.My.MySettings.Default
             End Get
         End Property
     End Module

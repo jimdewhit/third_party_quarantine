@@ -1,10 +1,13 @@
 ﻿Imports System.IO
 Imports System.Net
-
+Imports System.Diagnostics
+Imports System.Version
+Imports System
 
 Public Class frmMain
     Dim objNodeList, tagText, objUpdateCheck
     Dim xmlDoc = CreateObject("Msxml2.DOMDocument")
+    Dim strQuarantineStatus As String
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cboInstallOptions.Items.Add("Install all updates")
@@ -12,6 +15,8 @@ Public Class frmMain
         cboInstallOptions.SelectedIndex = 0
 
         GetProgramList()
+
+        RunQuarantine("/s", True)
 
         cmdReload.Hide()
 
@@ -59,7 +64,7 @@ Public Class frmMain
                 If programName(1) = "Flash" Then
                     If programName(4) = "ActiveX" Then
                         installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
-                        fileList = installerDirectory.GetFiles("*" & programName(1) & "*" & "ax" & ".exe")
+                        fileList = installerDirectory.GetFiles("*" & programName(1) & "*" & "x" & "*" & ".exe")
                         installer = fileList(0).FullName
                     Else
                         installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
@@ -127,7 +132,7 @@ Public Class frmMain
     Public Sub GetProgramList()
         'For testing purposes.
         'xmlDoc.load("\\ant\dept-na\oak4\Support\IT\James\State_OAK4_9HBB7Y1\Third Party.xml")
-        'xmlDoc.load("C:\Users\jwhitney\Desktop\Third Party.xml")
+        xmlDoc.load("C:\Users\jwhitney\Desktop\Third Party.xml")
 
         'Open Quarantine third party software state file.
         'Parse XML file for a tag unique to systems with third party quarantine issues.
@@ -138,7 +143,7 @@ Public Class frmMain
         'extract the name of the program and add it to the list box.
         'Otherwise, add the item "None" to the list box and disable the Install button.
 
-        xmlDoc.load("C:\Program Files (x86)\Quarantine\State\Third Party.xml")
+        'xmlDoc.load("C:\Program Files (x86)\Quarantine\State\Third Party.xml")
         objUpdateCheck = xmlDoc.getElementsByTagName("firstRun")
         objNodeList = xmlDoc.getElementsByTagName("d3p1:Key")
 
@@ -147,6 +152,7 @@ Public Class frmMain
                 tagText = i.Text
                 lstPrograms.Items.Add(tagText)
             Next
+            cmdInstall.Enabled = True
         Else
             lstPrograms.Items.Add("None")
             cmdInstall.Enabled = False
@@ -154,26 +160,149 @@ Public Class frmMain
     End Sub
 
     Public Sub ReevaluateQuarantine()
-        Dim objEvaluate As System.Diagnostics.Process
-
         cmdInstall.Enabled = False
         lstPrograms.Items.Clear()
 
-        Try
-            objEvaluate = New System.Diagnostics.Process()
-            objEvaluate.StartInfo.FileName = "C:\Program Files (x86)\Quarantine\quarantine.exe"
-            objEvaluate.StartInfo.Arguments = "/e"
-            objEvaluate.Start()
-
-            'Wait until the process passes back an exit code 
-            objEvaluate.WaitForExit()
-
-            'Free resources associated with this process
-            objEvaluate.Close()
-        Catch
-            MessageBox.Show("Could not start evaluation.", "Error")
-        End Try
+        RunQuarantine("/e")
+        RunQuarantine("/s", True)
 
         GetProgramList()
+    End Sub
+
+    Public Sub RestartQuarantine()
+        Dim objStop As System.Diagnostics.Process
+        Dim objStart As System.Diagnostics.Process
+
+        Try
+            objStop = New System.Diagnostics.Process()
+            objStop.StartInfo.FileName = "net"
+            objStop.StartInfo.Arguments = "stop quarantine"
+            objStop.Start()
+
+            'Wait until the process passes back an exit code 
+            objStop.WaitForExit()
+
+            'Free resources associated with this process
+            objStop.Close()
+
+            objStart = New System.Diagnostics.Process()
+            objStart.StartInfo.FileName = "net"
+            objStart.StartInfo.Arguments = "start quarantine"
+            objStart.Start()
+
+            'Wait until the process passes back an exit code 
+            objStart.WaitForExit()
+
+            'Free resources associated with this process
+            objStart.Close()
+        Catch
+            MessageBox.Show("Could not restart quarantine.", "Error")
+        End Try
+    End Sub
+
+    Public Sub RunWindowsUpdates()
+        Dim objUpdates As System.Diagnostics.Process
+
+        Try
+            objUpdates = New System.Diagnostics.Process()
+            objUpdates.StartInfo.FileName = "C:\Windows\system32\wuapp.exe"
+            objUpdates.StartInfo.Arguments = "startmenu"
+            objUpdates.Start()
+
+            ''Wait until the process passes back an exit code 
+            'objUpdates.WaitForExit()
+
+            ''Free resources associated with this process
+            'objUpdates.Close()
+        Catch
+            MessageBox.Show("Could not start Windows Updates.", "Error")
+        End Try
+    End Sub
+
+    Public Sub RunQuarantine(ByVal arguments As String, Optional ByVal window As Boolean = False)
+        Dim objQuarantine As System.Diagnostics.Process
+        Dim readerStatus As IO.StreamReader
+        Dim strStatus As String
+
+        Try
+            objQuarantine = New System.Diagnostics.Process()
+            objQuarantine.StartInfo.FileName = "C:\Program Files (x86)\Quarantine\quarantine.exe"
+            objQuarantine.StartInfo.Arguments = arguments
+            If window = True Then
+                objQuarantine.StartInfo.UseShellExecute = False
+                objQuarantine.StartInfo.CreateNoWindow = True
+                objQuarantine.StartInfo.RedirectStandardOutput = True
+            End If
+
+            objQuarantine.Start()
+
+            If arguments = "/s" And window = True Then
+                readerStatus = objQuarantine.StandardOutput
+                strStatus = readerStatus.ReadLine()
+                lblQuarantineStatus.Text = strStatus
+                If lblQuarantineStatus.Text = "ComplianceStatus: Compliant" Then
+                    lblQuarantineStatus.ForeColor = Color.Green
+                Else
+                    lblQuarantineStatus.ForeColor = Color.Red
+                End If
+            End If
+
+            If arguments = "/cs /q" And window = True Then
+                readerStatus = objQuarantine.StandardOutput
+                strQuarantineStatus = readerStatus.ReadToEnd()
+            End If
+
+            'Wait until the process passes back an exit code 
+            objQuarantine.WaitForExit()
+
+            'Free resources associated with this process
+            objQuarantine.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error")
+        End Try
+    End Sub
+
+    Private Sub chkRestart_CheckedChanged(sender As Object, e As EventArgs) Handles chkRestart.CheckedChanged
+        If chkRestart.Checked = True Then
+            chkEvaluate.Text = "Re-evaluate Quarantine status after restarting service."
+        Else
+            chkEvaluate.Text = "Re-evaluate Quarantine status."
+        End If
+    End Sub
+
+    Public Function GetFileVersionInfo(ByVal filename As String) As Version
+        Return Version.Parse(FileVersionInfo.GetVersionInfo(filename).FileVersion)
+    End Function
+
+    Private Sub cmdQuarantine_Click(sender As Object, e As EventArgs) Handles cmdQuarantine.Click
+        If chkRestart.Checked = True And chkEvaluate.Checked = True Then
+            RestartQuarantine()
+            ReevaluateQuarantine()
+        ElseIf chkRestart.Checked = True And chkEvaluate.Checked = False Then
+            RestartQuarantine()
+        ElseIf chkRestart.Checked = False And chkEvaluate.Checked = True Then
+            ReevaluateQuarantine()
+        Else
+            MessageBox.Show("You didn't select any options. Please try again.", "Error")
+        End If
+
+        chkRestart.Checked = False
+        chkEvaluate.Checked = False
+    End Sub
+
+    Private Sub cmdWindowsUpdates_Click(sender As Object, e As EventArgs) Handles cmdWindowsUpdates.Click
+        RunWindowsUpdates()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
+        RunQuarantine("/cs /q", True)
+
+        MessageBox.Show(strQuarantineStatus)
+    End Sub
+
+    Private Sub lblQuarantineStatus_Click(sender As Object, e As EventArgs) Handles lblQuarantineStatus.Click
+        RunQuarantine("/cs /q", True)
+
+        MessageBox.Show(strQuarantineStatus, "Quarantine Status Details")
     End Sub
 End Class

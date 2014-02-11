@@ -2,20 +2,20 @@
 <doc>
 <assembly>
 <name>
-ThirdPartyQuarantineFix
+QuarantineResolver
 </name>
 </assembly>
 <members>
-<member name="P:ThirdPartyQuarantineFix.My.Resources.Resources.ResourceManager">
+<member name="P:QuarantineResolver.My.Resources.Resources.ResourceManager">
 	<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
-</member><member name="P:ThirdPartyQuarantineFix.My.Resources.Resources.Culture">
+</member><member name="P:QuarantineResolver.My.Resources.Resources.Culture">
 	<summary>
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
-</member><member name="T:ThirdPartyQuarantineFix.My.Resources.Resources">
+</member><member name="T:QuarantineResolver.My.Resources.Resources">
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.
 </summary>
