@@ -52,7 +52,7 @@ Partial Class frmMain
         '
         'cmdInstall
         '
-        Me.cmdInstall.Location = New System.Drawing.Point(302, 152)
+        Me.cmdInstall.Location = New System.Drawing.Point(302, 153)
         Me.cmdInstall.Name = "cmdInstall"
         Me.cmdInstall.Size = New System.Drawing.Size(145, 45)
         Me.cmdInstall.TabIndex = 1
@@ -62,14 +62,14 @@ Partial Class frmMain
         'cboInstallOptions
         '
         Me.cboInstallOptions.FormattingEnabled = True
-        Me.cboInstallOptions.Location = New System.Drawing.Point(279, 33)
+        Me.cboInstallOptions.Location = New System.Drawing.Point(279, 35)
         Me.cboInstallOptions.Name = "cboInstallOptions"
         Me.cboInstallOptions.Size = New System.Drawing.Size(193, 21)
         Me.cboInstallOptions.TabIndex = 2
         '
         'cmdReload
         '
-        Me.cmdReload.Location = New System.Drawing.Point(336, 86)
+        Me.cmdReload.Location = New System.Drawing.Point(335, 91)
         Me.cmdReload.Name = "cmdReload"
         Me.cmdReload.Size = New System.Drawing.Size(75, 23)
         Me.cmdReload.TabIndex = 3

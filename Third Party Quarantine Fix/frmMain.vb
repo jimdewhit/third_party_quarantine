@@ -31,6 +31,11 @@ Public Class frmMain
                 'For testing purposes.
                 'programs = programs & GetInstaller(i) & vbNewLine
                 'programs = programs & i & vbNewLine
+                If i.contains("Shockwave") Then
+                    RunInstaller(GetInstaller("Adobe Uninstaller"))
+                ElseIf i.contains("Development") Then
+                    RunProgramsandFeatures()
+                End If
                 RunInstaller(GetInstaller(i))
             Next
             'cmdInstall.Enabled = True
@@ -39,7 +44,11 @@ Public Class frmMain
             'For testing purposes.
             'MsgBox("Install update for " & programs)
             'MsgBox("Install update for " & GetInstaller(lstPrograms.SelectedItem))
-
+            If lstPrograms.SelectedItem.contains("Shockwave") Then
+                RunInstaller(GetInstaller("Adobe Uninstaller"))
+            ElseIf lstPrograms.SelectedItem.contains("Development") Then
+                RunProgramsandFeatures()
+            End If
             RunInstaller(GetInstaller(lstPrograms.SelectedItem))
             'cmdInstall.Enabled = True
         End If
@@ -88,10 +97,20 @@ Public Class frmMain
                 installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(1))
                 fileList = installerDirectory.GetFiles("*" & programName(1) & "*" & ".exe")
                 installer = fileList(0).FullName
+            ElseIf programName(0) = "Java" Then
+                If programName(2) = "Development" Then
+                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                    fileList = installerDirectory.GetFiles("*" & "jdk" & "*" & ".exe")
+                    installer = fileList(0).FullName()
+                Else
+                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                    fileList = installerDirectory.GetFiles("*" & "jre" & "*" & ".exe")
+                    installer = fileList(0).FullName()
+                End If
             Else
-                installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
-                fileList = installerDirectory.GetFiles("*" & programName(0) & "*" & ".exe")
-                installer = fileList(0).FullName
+                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                    fileList = installerDirectory.GetFiles("*" & programName(0) & "*" & ".exe")
+                    installer = fileList(0).FullName
             End If
         Catch ex As Exception
             If programName(0) = "Adobe" Then
@@ -132,7 +151,7 @@ Public Class frmMain
     Public Sub GetProgramList()
         'For testing purposes.
         'xmlDoc.load("\\ant\dept-na\oak4\Support\IT\James\State_OAK4_9HBB7Y1\Third Party.xml")
-        xmlDoc.load("C:\Users\jwhitney\Desktop\Third Party.xml")
+        'xmlDoc.load("C:\Users\jwhitney\Desktop\Third Party.xml")
 
         'Open Quarantine third party software state file.
         'Parse XML file for a tag unique to systems with third party quarantine issues.
@@ -143,7 +162,7 @@ Public Class frmMain
         'extract the name of the program and add it to the list box.
         'Otherwise, add the item "None" to the list box and disable the Install button.
 
-        'xmlDoc.load("C:\Program Files (x86)\Quarantine\State\Third Party.xml")
+        xmlDoc.load("C:\Program Files (x86)\Quarantine\State\Third Party.xml")
         objUpdateCheck = xmlDoc.getElementsByTagName("firstRun")
         objNodeList = xmlDoc.getElementsByTagName("d3p1:Key")
 
@@ -216,6 +235,25 @@ Public Class frmMain
             'objUpdates.Close()
         Catch
             MessageBox.Show("Could not start Windows Updates.", "Error")
+        End Try
+    End Sub
+
+    Public Sub RunProgramsandFeatures()
+        Dim objUpdates As System.Diagnostics.Process
+
+        Try
+            objUpdates = New System.Diagnostics.Process()
+            objUpdates.StartInfo.FileName = "control"
+            objUpdates.StartInfo.Arguments = "appwiz.cpl"
+            objUpdates.Start()
+
+            ''Wait until the process passes back an exit code 
+            'objUpdates.WaitForExit()
+
+            ''Free resources associated with this process
+            'objUpdates.Close()
+        Catch
+            MessageBox.Show("Could not start Programs and Features.", "Error")
         End Try
     End Sub
 
@@ -305,4 +343,5 @@ Public Class frmMain
 
         MessageBox.Show(strQuarantineStatus, "Quarantine Status Details")
     End Sub
+
 End Class
