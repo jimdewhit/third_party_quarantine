@@ -33,7 +33,7 @@ Public Class frmMain
                 'programs = programs & i & vbNewLine
                 If i.contains("Shockwave") Then
                     RunInstaller(GetInstaller("Adobe Uninstaller"))
-                ElseIf i.contains("Development") Then
+                ElseIf i.contains("Java") Then
                     RunProgramsandFeatures()
                 End If
                 RunInstaller(GetInstaller(i))
@@ -46,7 +46,7 @@ Public Class frmMain
             'MsgBox("Install update for " & GetInstaller(lstPrograms.SelectedItem))
             If lstPrograms.SelectedItem.contains("Shockwave") Then
                 RunInstaller(GetInstaller("Adobe Uninstaller"))
-            ElseIf lstPrograms.SelectedItem.contains("Development") Then
+            ElseIf lstPrograms.SelectedItem.contains("Java") Then
                 RunProgramsandFeatures()
             End If
             RunInstaller(GetInstaller(lstPrograms.SelectedItem))
@@ -58,7 +58,9 @@ Public Class frmMain
     End Sub
 
     Private Sub cmdReload_Click(sender As Object, e As EventArgs) Handles cmdReload.Click
-        ReevaluateQuarantine()
+        Dim testString = "This is a test string."
+        Dim testArray = testString.Split()
+        MessageBox.Show(testArray.Last)
     End Sub
 
     Function GetInstaller(ByVal program As String) As String
@@ -99,13 +101,25 @@ Public Class frmMain
                 installer = fileList(0).FullName
             ElseIf programName(0) = "Java" Then
                 If programName(2) = "Development" Then
-                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
-                    fileList = installerDirectory.GetFiles("*" & "jdk" & "*" & ".exe")
-                    installer = fileList(0).FullName()
+                    If programName.Last = "(64-bit)" Then
+                        installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                        fileList = installerDirectory.GetFiles("*" & "jdk" & "*" & "x64" & ".exe")
+                        installer = fileList(0).FullName()
+                    Else
+                        installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                        fileList = installerDirectory.GetFiles("*" & "jdk" & "*" & "i586" & ".exe")
+                        installer = fileList(0).FullName()
+                    End If
                 Else
-                    installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
-                    fileList = installerDirectory.GetFiles("*" & "jre" & "*" & ".exe")
-                    installer = fileList(0).FullName()
+                    If programName.Last = "(64-bit)" Then
+                        installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                        fileList = installerDirectory.GetFiles("*" & "jre" & "*" & "x64" & ".exe")
+                        installer = fileList(0).FullName()
+                    Else
+                        installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
+                        fileList = installerDirectory.GetFiles("*" & "jre" & "*" & "i586" & ".exe")
+                        installer = fileList(0).FullName()
+                    End If
                 End If
             Else
                     installerDirectory = New DirectoryInfo(installerSourceDirectory & programName(0))
